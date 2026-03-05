@@ -2,7 +2,7 @@
 
 🤖 **AI 驱动的智能消息平台**
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/your-repo/auto-reply-pro)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/sendwealth/auto-reply-pro)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)](https://nodejs.org/)
 
@@ -18,7 +18,7 @@
 
 ### 1. 克隆项目
 ```bash
-git clone https://github.com/your-repo/auto-reply-pro.git
+git clone https://github.com/sendwealth/auto-reply-pro.git
 cd auto-reply-pro
 ```
 

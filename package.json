@@ -43,10 +43,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-repo/auto-reply-pro.git"
+    "url": "https://github.com/sendwealth/auto-reply-pro.git"
   },
   "bugs": {
-    "url": "https://github.com/your-repo/auto-reply-pro/issues"
+    "url": "https://github.com/sendwealth/auto-reply-pro/issues"
   },
-  "homepage": "https://github.com/your-repo/auto-reply-pro#readme"
+  "homepage": "https://github.com/sendwealth/auto-reply-pro#readme"
 }
