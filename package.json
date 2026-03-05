@@ -1,0 +1,52 @@
+{
+  "name": "auto-reply-pro",
+  "version": "1.0.0",
+  "description": "AI驱动的智能消息平台 - 支持飞书、企业微信、邮件、Discord、Web Chat",
+  "main": "src/index-secure.js",
+  "scripts": {
+    "start": "node src/index-secure.js",
+    "start:basic": "node src/index.js",
+    "start:full": "node src/index-full.js",
+    "test": "node tests/core.test.js",
+    "test:functional": "node tests/functional/comprehensive-test.js",
+    "test:performance": "node tests/performance/performance-test.js",
+    "test:security": "node tests/security/security-test.js",
+    "check": "node scripts/check-env.js",
+    "deploy": "./scripts/deploy.sh"
+  },
+  "keywords": [
+    "ai",
+    "chatbot",
+    "auto-reply",
+    "messaging",
+    "feishu",
+    "wechat",
+    "discord",
+    "email",
+    "automation"
+  ],
+  "author": "AI CEO",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-cron": "^3.0.3",
+    "node-fetch": "^2.7.0",
+    "nodemailer": "^6.9.8",
+    "uuid": "^9.0.1"
+  },
+  "optionalDependencies": {
+    "axios": "^1.13.6",
+    "discord.js": "^14.25.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-repo/auto-reply-pro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-repo/auto-reply-pro/issues"
+  },
+  "homepage": "https://github.com/your-repo/auto-reply-pro#readme"
+}
