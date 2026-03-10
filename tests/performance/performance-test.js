@@ -65,7 +65,7 @@ async function testThroughput() {
   const startTime = Date.now();
   
   // 模拟消息处理
-  const ContextManager = require('../src/core/ContextManager');
+  const ContextManager = require('../../src/core/ContextManager');
   const cm = new ContextManager();
   
   for (let i = 0; i < messageCount; i++) {
@@ -103,7 +103,7 @@ async function testConcurrency() {
   const concurrencyLevel = 10;
   const promises = [];
   
-  const ContextManager = require('../src/core/ContextManager');
+  const ContextManager = require('../../src/core/ContextManager');
   const cm = new ContextManager();
   
   const startTime = Date.now();
@@ -161,7 +161,7 @@ function testMemoryUsage() {
 console.log('\n📝 模板渲染性能测试\n');
 
 async function testTemplateRendering() {
-  const TemplateManager = require('../src/core/TemplateManager');
+  const TemplateManager = require('../../src/core/TemplateManager');
   const tm = new TemplateManager();
   
   const iterations = 1000;
@@ -190,7 +190,7 @@ async function testTemplateRendering() {
 console.log('\n🗄️ 数据库性能测试\n');
 
 async function testDatabasePerformance() {
-  const ContextManager = require('../src/core/ContextManager');
+  const ContextManager = require('../../src/core/ContextManager');
   const cm = new ContextManager();
   
   // 写入测试

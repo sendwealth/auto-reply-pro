@@ -1,0 +1,260 @@
+{
+  "info": {
+    "name": "Auto-Reply Pro API",
+    "_postman_id": "auto-reply-pro-api-001",
+    "description": "AI驱动的智能消息平台API文档",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "检查服务健康状态"
+          },
+          "response": []
+        },
+        {
+          "name": "System Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "status"]
+            },
+            "description": "获取系统详细状态（需要API Key）"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Messages",
+      "item": [
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"platform\": \"discord\",\n  \"message\": \"Hello World\",\n  \"recipient\": \"channel-123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/message",
+              "host": ["{{base_url}}"],
+              "path": ["api", "message"]
+            },
+            "description": "发送消息到指定平台"
+          },
+          "response": []
+        },
+        {
+          "name": "Send to Feishu",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"platform\": \"feishu\",\n  \"message\": \"测试消息 - 来自Auto-Reply Pro\",\n  \"recipient\": \"ou_xxx\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/message",
+              "host": ["{{base_url}}"],
+              "path": ["api", "message"]
+            },
+            "description": "发送消息到飞书"
+          },
+          "response": []
+        },
+        {
+          "name": "Send to WeChat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"platform\": \"wechat\",\n  \"message\": \"企业微信测试消息\",\n  \"recipient\": \"user_id\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/message",
+              "host": ["{{base_url}}"],
+              "path": ["api", "message"]
+            },
+            "description": "发送消息到企业微信"
+          },
+          "response": []
+        },
+        {
+          "name": "Send Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"platform\": \"email\",\n  \"message\": \"这是一封测试邮件\",\n  \"recipient\": \"test@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/message",
+              "host": ["{{base_url}}"],
+              "path": ["api", "message"]
+            },
+            "description": "发送邮件"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "item": [
+        {
+          "name": "Chat with AI",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"你好，请介绍一下产品功能\",\n  \"userId\": \"user-123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/chat",
+              "host": ["{{base_url}}"],
+              "path": ["api", "chat"]
+            },
+            "description": "与AI聊天接口"
+          },
+          "response": []
+        },
+        {
+          "name": "Chat - Pricing",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"产品价格是多少？\",\n  \"userId\": \"user-123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/chat",
+              "host": ["{{base_url}}"],
+              "path": ["api", "chat"]
+            },
+            "description": "询问价格相关问题"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Templates",
+      "item": [
+        {
+          "name": "Get All Templates",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/templates",
+              "host": ["{{base_url}}"],
+              "path": ["api", "templates"]
+            },
+            "description": "获取所有消息模板"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3004",
+      "type": "string"
+    },
+    {
+      "key": "api_key",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

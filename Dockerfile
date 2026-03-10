@@ -1,34 +1,44 @@
-FROM node:18-alpine
+# 多阶段构建
+FROM node:18-alpine AS builder
 
-# 创建非 root 用户
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S auto-reply -u 1001 -G nodejs
-
-# 设置工作目录
 WORKDIR /app
 
-# 复制 package 文件
-COPY package*.json ./
+# 设置npm镜像（解决国内网络问题）
+RUN npm config set registry https://registry.npmmirror.com
 
 # 安装依赖
-RUN npm ci --only=production && \
-    npm cache clean --force
+COPY package*.json ./
+RUN npm ci --only=production
 
 # 复制源代码
 COPY . .
 
-# 更改文件所有者
-RUN chown -R auto-reply:nodejs /app
+# 生产环境
+FROM node:18-alpine AS production
 
-# 切换到非 root 用户
-USER auto-reply
+WORKDIR /app
 
-# 暴露端口
-EXPOSE 3002 3003
+# 安全：非root用户
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nodejs -u 1001
+
+# 复制必要文件
+COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nodejs:nodejs /app/src ./src
+COPY --from=builder --chown=nodejs:nodejs /app/public ./public
+COPY --from=builder --chown=nodejs:nodejs /app/package*.json ./
+
+USER nodejs
+
+# 环境变量
+ENV NODE_ENV=production
+ENV PORT=3002
 
 # 健康检查
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3002/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
+  CMD node healthcheck.js
 
-# 启动应用
+EXPOSE 3002 3003
+
+# 启动命令
 CMD ["node", "src/index-secure.js"]

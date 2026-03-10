@@ -50,29 +50,29 @@ async function asyncTest(name, fn) {
 console.log('\n📦 核心引擎测试\n');
 
 test('ContextManager - 基础功能', () => {
-  const ContextManager = require('../src/core/ContextManager');
+  const ContextManager = require('../../src/core/ContextManager');
   const cm = new ContextManager();
   assert(cm instanceof ContextManager);
   assert(cm.sessions instanceof Map);
 });
 
 test('TemplateManager - 基础功能', () => {
-  const TemplateManager = require('../src/core/TemplateManager');
+  const TemplateManager = require('../../src/core/TemplateManager');
   const tm = new TemplateManager();
   assert(tm instanceof TemplateManager);
   assert(tm.templates instanceof Map);
 });
 
 test('MessageScheduler - 基础功能', () => {
-  const MessageScheduler = require('../src/scheduler/MessageScheduler');
+  const MessageScheduler = require('../../src/scheduler/MessageScheduler');
   const ms = new MessageScheduler();
   assert(ms instanceof MessageScheduler);
   assert(Array.isArray(ms.taskQueue));
 });
 
 test('MessageGenerator - 基础功能', () => {
-  const TemplateManager = require('../src/core/TemplateManager');
-  const MessageGenerator = require('../src/generator/MessageGenerator');
+  const TemplateManager = require('../../src/core/TemplateManager');
+  const MessageGenerator = require('../../src/generator/MessageGenerator');
   
   const tm = new TemplateManager();
   const mg = new MessageGenerator({ templateManager: tm });
@@ -84,29 +84,29 @@ test('MessageGenerator - 基础功能', () => {
 console.log('\n🌐 平台适配器测试\n');
 
 test('FeishuAdapter - 初始化', () => {
-  const FeishuAdapter = require('../src/adapters/FeishuAdapter');
+  const FeishuAdapter = require('../../src/adapters/FeishuAdapter');
   const adapter = new FeishuAdapter();
   assert(adapter instanceof FeishuAdapter);
   assert(typeof adapter.getTenantToken === 'function');
 });
 
 test('WeChatAdapter - 初始化', () => {
-  const WeChatAdapter = require('../src/adapters/WeChatAdapter');
+  const WeChatAdapter = require('../../src/adapters/WeChatAdapter');
   const adapter = new WeChatAdapter();
   assert(adapter instanceof WeChatAdapter);
   assert(typeof adapter.getAccessToken === 'function');
 });
 
 test('EmailAdapter - 初始化', () => {
-  const EmailAdapter = require('../src/adapters/EmailAdapter');
+  const EmailAdapter = require('../../src/adapters/EmailAdapter');
   const adapter = new EmailAdapter();
   assert(adapter instanceof EmailAdapter);
   assert(typeof adapter.sendEmail === 'function');
 });
 
 test('WebAdapter - 初始化', () => {
-  const WebAdapter = require('../src/adapters/WebAdapter');
-  const adapter = new WebAdapter();
+  const WebAdapter = require('../../src/adapters/WebAdapter');
+  const adapter = new WebAdapter({});  // 需要传入配置对象
   assert(adapter instanceof WebAdapter);
   assert(typeof adapter.connect === 'function');
 });
@@ -116,7 +116,7 @@ test('WebAdapter - 初始化', () => {
 console.log('\n🎯 意图识别测试\n');
 
 test('意图识别 - 问候', async () => {
-  const TemplateManager = require('../src/core/TemplateManager');
+  const TemplateManager = require('../../src/core/TemplateManager');
   const tm = new TemplateManager();
   
   const text = '你好';
@@ -156,7 +156,7 @@ test('意图识别 - 功能', () => {
 console.log('\n📝 模板测试\n');
 
 test('模板 - 获取问候模板', () => {
-  const TemplateManager = require('../src/core/TemplateManager');
+  const TemplateManager = require('../../src/core/TemplateManager');
   const tm = new TemplateManager();
   
   const greeting = tm.getTemplate('greeting', 'zh');
@@ -165,7 +165,7 @@ test('模板 - 获取问候模板', () => {
 });
 
 test('模板 - 获取价格模板', () => {
-  const TemplateManager = require('../src/core/TemplateManager');
+  const TemplateManager = require('../../src/core/TemplateManager');
   const tm = new TemplateManager();
   
   const pricing = tm.getTemplate('pricing', 'zh');
@@ -174,7 +174,7 @@ test('模板 - 获取价格模板', () => {
 });
 
 test('模板 - 变量替换', () => {
-  const TemplateManager = require('../src/core/TemplateManager');
+  const TemplateManager = require('../../src/core/TemplateManager');
   const tm = new TemplateManager();
   
   tm.addCustomTemplate('test', '你好，{{name}}！欢迎来到{{place}}。');
@@ -188,7 +188,7 @@ test('模板 - 变量替换', () => {
 console.log('\n🔄 上下文管理测试\n');
 
 asyncTest('上下文 - 获取上下文', async () => {
-  const ContextManager = require('../src/core/ContextManager');
+  const ContextManager = require('../../src/core/ContextManager');
   const cm = new ContextManager();
   
   const message = {
@@ -202,7 +202,7 @@ asyncTest('上下文 - 获取上下文', async () => {
 });
 
 asyncTest('上下文 - 更新上下文', async () => {
-  const ContextManager = require('../src/core/ContextManager');
+  const ContextManager = require('../../src/core/ContextManager');
   const cm = new ContextManager();
   
   const message = {
@@ -225,7 +225,7 @@ asyncTest('上下文 - 更新上下文', async () => {
 console.log('\n📅 消息调度测试\n');
 
 test('调度 - 创建任务', () => {
-  const MessageScheduler = require('../src/scheduler/MessageScheduler');
+  const MessageScheduler = require('../../src/scheduler/MessageScheduler');
   const ms = new MessageScheduler();
   
   const task = {
@@ -241,7 +241,7 @@ test('调度 - 创建任务', () => {
 });
 
 test('调度 - 优先级队列', () => {
-  const MessageScheduler = require('../src/scheduler/MessageScheduler');
+  const MessageScheduler = require('../../src/scheduler/MessageScheduler');
   const ms = new MessageScheduler();
   
   ms.scheduleMessage({ platform: 'web', recipients: [], message: '低优先级', priority: 'low' });
@@ -258,7 +258,7 @@ test('调度 - 优先级队列', () => {
 console.log('\n🖥️ Web 界面测试\n');
 
 test('WebDashboard - 初始化', () => {
-  const WebDashboard = require('../src/dashboard/WebDashboard');
+  const WebDashboard = require('../../src/dashboard/WebDashboard');
   const dashboard = new WebDashboard({});
   assert(dashboard instanceof WebDashboard);
   assert(typeof dashboard.start === 'function');

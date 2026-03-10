@@ -4,6 +4,19 @@
 
 const express = require('express');
 
+/**
+ * XSS 防护 - 清理用户输入
+ */
+function sanitize(input) {
+  if (typeof input !== 'string') return input;
+  return input
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+}
+
 class WebAdapter {
   constructor(config) {
     this.config = {
@@ -48,8 +61,13 @@ class WebAdapter {
         try {
           const { message, userId, sessionId } = req.body;
 
+          // XSS 防护：清理输入
+          const sanitizedMessage = sanitize(message);
+          const sanitizedUserId = sanitize(userId);
+          const sanitizedSessionId = sanitize(sessionId);
+
           // 转换为统一消息格式
-          const universalMessage = this.toUniversalMessage(message, userId, sessionId);
+          const universalMessage = this.toUniversalMessage(sanitizedMessage, sanitizedUserId, sanitizedSessionId);
 
           // 调用消息处理器
           if (this.messageHandler) {

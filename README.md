@@ -47,6 +47,50 @@ npm start
 - **Web Chat API**: http://localhost:3002/api/chat
 - **健康检查**: http://localhost:3002/health
 
+## 🐳 Docker 部署
+
+### 快速部署
+
+```bash
+# 1. 配置环境变量
+cp .env.example .env
+# 编辑 .env 文件
+
+# 2. 一键部署
+chmod +x deploy.sh
+./deploy.sh
+```
+
+### 手动部署
+
+```bash
+# 构建镜像
+docker-compose build
+
+# 启动服务
+docker-compose up -d
+
+# 查看日志
+docker-compose logs -f
+
+# 健康检查
+curl http://localhost:3002/health
+```
+
+### Docker 特性
+
+- ✅ **多阶段构建** - 最小化镜像体积
+- ✅ **健康检查** - 自动故障恢复
+- ✅ **非 root 用户** - 安全运行
+- ✅ **数据持久化** - Volume 存储
+- ✅ **Redis 集成** - 高性能缓存
+
+### 端口映射
+
+- `3002` - 主服务 API
+- `3003` - Web 管理界面
+- `6380` - Redis（外部访问）
+
 ## 📖 文档
 
 - [快速开始指南](QUICK-START-GUIDE.md)
@@ -54,6 +98,45 @@ npm start
 - [部署指南](DEPLOYMENT-GUIDE.md)
 - [消息发送器指南](MESSAGE-SENDER-GUIDE.md)
 - [飞书机器人配置](FEISHU-BOT-SETUP.md)
+
+## 📚 API文档
+
+**Swagger UI**: http://localhost:3004/api-docs
+
+**Postman Collection**: 导入 `postman/AUTO-REPLY-PRO.postman_collection.json`
+
+### 快速测试
+
+1. **健康检查**
+```bash
+curl http://localhost:3004/health
+```
+
+2. **发送消息**
+```bash
+curl -X POST http://localhost:3004/api/message \
+  -H "X-API-Key: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{"platform":"discord","message":"Hello"}'
+```
+
+3. **AI聊天**
+```bash
+curl -X POST http://localhost:3004/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message":"你好","userId":"test-user"}'
+```
+
+### API端点
+
+| 端点 | 方法 | 描述 | 认证 |
+|------|------|------|------|
+| `/health` | GET | 健康检查 | 无 |
+| `/api/message` | POST | 发送消息 | API Key |
+| `/api/chat` | POST | AI聊天 | 无 |
+| `/api/templates` | GET | 获取模板 | API Key |
+| `/api/status` | GET | 系统状态 | API Key |
+| `/api-docs` | GET | Swagger UI | 无 |
 
 ## 🛠️ 脚本命令
 

@@ -137,4 +137,27 @@ class DiscordAdapter {
   }
 }
 
-module.exports = DiscordAdapter;
+// PlatformRegistry - 平台注册表
+class PlatformRegistry {
+  constructor() {
+    this.platforms = new Map();
+  }
+
+  register(name, adapter) {
+    this.platforms.set(name, adapter);
+  }
+
+  get(name) {
+    return this.platforms.get(name);
+  }
+
+  getAll() {
+    return Array.from(this.platforms.entries());
+  }
+
+  has(name) {
+    return this.platforms.has(name);
+  }
+}
+
+module.exports = { DiscordAdapter, PlatformRegistry };
